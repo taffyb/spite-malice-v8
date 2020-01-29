@@ -1,0 +1,7 @@
+
+.player-stacks {
+	display:flex;
+  	flex-flow: row ;
+  	/*border:black solid 1px;*/
+  	max-width:290px;
+}
