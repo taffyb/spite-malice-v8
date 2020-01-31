@@ -1,8 +1,31 @@
 <div class="play-area">
-	<div class="player-stacks">
-		<div><app-player-stack [cards]="cards[0]" [canDiscard]="canDiscard()"></app-player-stack></div>
-		<div><app-player-stack [cards]="cards[1]" [canDiscard]="canDiscard()"></app-player-stack></div>
-		<div><app-player-stack [cards]="cards[2]" [canDiscard]="canDiscard()"></app-player-stack></div>
-		<div><app-player-stack [cards]="cards[3]" [canDiscard]="canDiscard()"></app-player-stack></div>
-	</div>
+
+	<table class="player" *ngFor="let player of players">
+		<tr><th>Player2</th><th>Pile</th><th>Hand</th><th>Stacks</th></tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<div class="player-pile">
+					<app-pile [cards]="game.cardPositions[positionsEnum.PLAYER_PILE+(playerPositionsEnum.PLAYER_2*player)]"></app-pile>
+				</div>
+			</td>
+			<td>
+				<div class="player-hand">
+					<app-pile [cards]="game.cardPositions[positionsEnum.PLAYER_HAND_1+(playerPositionsEnum.PLAYER_2*player)]"></app-pile>
+					<app-pile [cards]="game.cardPositions[positionsEnum.PLAYER_HAND_2+(playerPositionsEnum.PLAYER_2*player)]"></app-pile>
+					<app-pile [cards]="game.cardPositions[positionsEnum.PLAYER_HAND_3+(playerPositionsEnum.PLAYER_2*player)]"></app-pile>
+					<app-pile [cards]="game.cardPositions[positionsEnum.PLAYER_HAND_4+(playerPositionsEnum.PLAYER_2*player)]"></app-pile>
+					<app-pile [cards]="game.cardPositions[positionsEnum.PLAYER_HAND_5+(playerPositionsEnum.PLAYER_2*player)]"></app-pile>
+				</div>
+			</td>
+			<td>		
+				<div class="player-stacks">
+					<app-player-stack [cards]="game.cardPositions[positionsEnum.PLAYER_STACK_1+(playerPositionsEnum.PLAYER_2*player)]" [canDiscard]="canDiscard()"></app-player-stack>
+					<app-player-stack [cards]="game.cardPositions[positionsEnum.PLAYER_STACK_2+(playerPositionsEnum.PLAYER_2*player)]" [canDiscard]="canDiscard()"></app-player-stack>
+					<app-player-stack [cards]="game.cardPositions[positionsEnum.PLAYER_STACK_3+(playerPositionsEnum.PLAYER_2*player)]" [canDiscard]="canDiscard()"></app-player-stack>
+					<app-player-stack [cards]="game.cardPositions[positionsEnum.PLAYER_STACK_4+(playerPositionsEnum.PLAYER_2*player)]" [canDiscard]="canDiscard()"></app-player-stack>
+				</div>
+			</td>
+		</tr>
+	</table>
 </div>

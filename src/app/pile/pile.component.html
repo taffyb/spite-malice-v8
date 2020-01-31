@@ -1,0 +1,9 @@
+<div class="pile-item" *ngIf="cards.length==0">
+	<card [pos]="1" [cardNo]="0"></card>
+</div>
+
+<ng-container *ngIf="cards.length>0">	
+	<div class="pile-item" >
+		<card [selectable]="true" [pos]="1" [cardNo]="cards[cards.length-1].cardNo"></card>
+	</div>
+</ng-container>

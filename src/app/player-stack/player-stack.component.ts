@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PlayerStackComponent implements OnInit {
   @Input()cards:number[];
-  @Input()canTarget:boolean=true;
+  @Input()canDiscard:boolean=true;
   
   constructor() { }
 

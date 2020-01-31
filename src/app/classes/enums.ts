@@ -3,6 +3,10 @@ export enum PlayerTypesEnum{
     DETERMINISTIC,
     REC_DETERMINISTIC
 }
+export enum PlayerPositionsEnum{
+    PLAYER_1,
+    PLAYER_2=10
+}
 export enum PositionsEnum{
     NO_POS=-1,
     PLAYER_PILE=0,

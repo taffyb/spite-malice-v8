@@ -1,4 +1,11 @@
-
+.player-pile{
+  	padding-right:15px;
+}
+.player-hand{
+	display:flex;
+  	flex-flow: row ;
+  	padding-right:15px;
+}
 .player-stacks {
 	display:flex;
   	flex-flow: row ;
