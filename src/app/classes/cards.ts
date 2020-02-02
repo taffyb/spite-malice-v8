@@ -1,6 +1,7 @@
 export interface ICardModel{
     cardNo:number;
-    position:number;}
+    position:number;
+}
 
 export class Card implements ICardModel{
     cardNo:number;
@@ -10,6 +11,4 @@ export class Card implements ICardModel{
         this.cardNo=cardNo;
         this.position=position;
     }
-    
-    
 }

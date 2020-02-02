@@ -4,8 +4,7 @@ import {Injectable} from '@angular/core';
 //import {Turn} from '../classes/Turn';
 //import {Deal} from '../classes/Deal';
 //import {Move} from '../classes/Move';
-import {PositionsEnum} from '../classes/Enums';
-import {CardsEnum} from '../classes/Enums';
+import {PositionsEnum, CardsEnum} from '../classes/enums';
 import {ICardModel} from '../classes/cards';
 
 @Injectable({

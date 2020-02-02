@@ -38,6 +38,7 @@ export enum SuitsEnum{
     DIAMONDS=39
 }
 export enum CardsEnum{
+    BACK=-1,
     NO_CARD=0,
     ACE,
     TWO,

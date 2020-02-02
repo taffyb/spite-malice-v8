@@ -1,9 +1,19 @@
-<div class="pile-item" *ngIf="cards.length==0">
-	<card [pos]="1" [cardNo]="0"></card>
-</div>
-
-<ng-container *ngIf="cards.length>0">	
+<ng-container *ngIf="cards.length==0">
 	<div class="pile-item" >
-		<card [selectable]="true" [pos]="1" [cardNo]="cards[cards.length-1].cardNo"></card>
+		<card [pos]="pos" [cardNo]="0" [options]="options" (onSelect)="select($event)"></card>
+	</div>
+</ng-container>
+<ng-container *ngIf="options.showCardFace && cards.length>0">	
+	<div class="pile-item" >
+		<card [options]="options" 
+			  [pos]="cards[cards.length-1].position" 
+			  [cardNo]="cards[cards.length-1].cardNo" 
+			  (onSelect)="select($event)">
+		</card>
+	</div>
+</ng-container>
+<ng-container *ngIf="!options.showCardFace && cards.length>0">
+	<div class="pile-item" >
+		<card [pos]="pos" [cardNo]="-1" [options]="options" (onSelect)="select($event)"></card>
 	</div>
 </ng-container>

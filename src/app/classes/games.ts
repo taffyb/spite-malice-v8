@@ -21,8 +21,6 @@ export class Game implements IGameModel{
         this.player1Uuid=player1Uuid;
         this.player1Uuid=player1Uuid;
         this.cards=[];
-        this.cardPositions=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
-    }
-    
-    
+        this.cardPositions=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
+    }  
 }

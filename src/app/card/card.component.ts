@@ -1,35 +1,36 @@
-import { Component, OnInit,Input,HostBinding } from '@angular/core';
-import { useAnimation, transition, trigger, style, animate } from '@angular/animations';
-//import { CardAnimation } from '../classes/CardAnimation';
-import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
-
-
+import { Component, OnInit,Input, Output,EventEmitter, HostBinding } from '@angular/core';
+import {Options} from '../classes/options'
+import {SelectedCard} from '../classes/selected-card'
 
 @Component({
     selector: 'card',
     templateUrl:'./card.component.html',
-    styleUrls: ['./card.component.css'],
-//  animations: [CardAnimation]
+    styleUrls: ['./card.component.css']
   })
   export class CardComponent {
     @Input()cardNo:number;
     @Input()pos:number;
-    @Input()selectable:boolean=false;
-    
-    @HostBinding('style') style: SafeStyle;
-    
-    constructor(sanitizer: DomSanitizer) {
-//      this.style = sanitizer.bypassSecurityTrustStyle('background: green;  display: block;');
+    @Input()options:Options = new Options();
+    @Output()onSelect:EventEmitter<SelectedCard> = new EventEmitter<SelectedCard>();
+        
+    constructor() {
     }
     
     filename():string{
-        let filename:string; 
-    console.log(`cardNo:${this.cardNo}`);
-        if(this.cardNo!=-1){
+        let filename:string;
+        if(this.cardNo>=0){
             filename="c"+(this.cardNo<10?"0"+this.cardNo:this.cardNo)+".png";
         }else{
             filename="back.png";
         }
         return filename;
+    }
+                    
+    toggleSelection(){
+
+        let selectedCard=new SelectedCard();
+        selectedCard.cardNo=this.cardNo;
+        selectedCard.position=this.pos;
+        this.onSelect.emit(selectedCard);
     }
 }

@@ -1,6 +1,6 @@
 import {IGameModel, Game} from '../classes/games';
 import {ICardModel, Card} from '../classes/cards';
-import {PositionsEnum} from '../classes/enums';
+import {PositionsEnum, CardsEnum} from '../classes/enums';
 import {DealerService} from './dealer.service';
 import {Injectable} from '@angular/core';
 
@@ -51,6 +51,7 @@ export class GameService{
             card= new Card(c,PositionsEnum.PLAYER_HAND_1+i);
             game.cards.push(card);
             game.cardPositions[PositionsEnum.PLAYER_HAND_1+i].push(card);
+//            game.cardPositions[PositionsEnum.PLAYER_HAND_1+i].push(CardsEnum.BACK);
             //player 2
             c=cardNos.pop();
             card= new Card(c,(PositionsEnum.PLAYER_HAND_1+i)+10);
@@ -58,10 +59,11 @@ export class GameService{
             game.cardPositions[(PositionsEnum.PLAYER_HAND_1+i)+10].push(card);
         }
         for(let i:number=0;i<cardNos.length;i++){
-            card= new Card(c,PositionsEnum.DECK);
+            card= new Card(cardNos[i],PositionsEnum.DECK);
             game.cards.push(card);
             game.cardPositions[PositionsEnum.DECK].push(card);
         }
+//        console.log(`DECK: ${JSON.stringify(game.cardPositions[PositionsEnum.DECK])}`);
         return game;
     }
     saveGame(){}

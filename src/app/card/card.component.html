@@ -1,4 +1,13 @@
 <div id="c{{pos}}.{{cardNo}}" 
-	[ngClass]="{'card':true, 'selectable':selectable}">
-	<img  src="/assets/cards/{{filename()}}"/>
+	[ngClass]="{'card':true, 
+				'selectableFrom':options.selectableFrom,
+				'selectableTo':options.selectableTo && (!selected), 
+				'selectable':options.selectableFrom || options.selectableTo,
+				'from':options.selected}">
+	<ng-container *ngIf="options.selectableFrom || options.selectableTo">
+		<img  src="/assets/cards/{{filename()}}" (click)="toggleSelection()"/>
+	</ng-container>
+	<ng-container *ngIf="!(options.selectableFrom || options.selectableTo)">
+		<img  src="/assets/cards/{{filename()}}"/>
+	</ng-container>
 </div>
