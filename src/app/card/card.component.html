@@ -3,9 +3,9 @@
 				'selectableFrom':options.selectableFrom,
 				'selectableTo':options.selectableTo && (!selected), 
 				'selectable':options.selectableFrom || options.selectableTo,
-				'from':options.selected}">
+				'from':options.selected}" #cardref>
 	<ng-container *ngIf="options.selectableFrom || options.selectableTo">
-		<img  src="/assets/cards/{{filename()}}" (click)="toggleSelection()"/>
+		<img  src="/assets/cards/{{filename()}}" (mousedown)="toggleSelection()"/>
 	</ng-container>
 	<ng-container *ngIf="!(options.selectableFrom || options.selectableTo)">
 		<img  src="/assets/cards/{{filename()}}"/>

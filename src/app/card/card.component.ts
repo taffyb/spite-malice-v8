@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, Output,EventEmitter, HostBinding } from '@angular/core';
+import {Component, OnInit,Input, Output, EventEmitter, HostBinding, ViewChild, ElementRef } from '@angular/core';
 import {Options} from '../classes/options'
 import {SelectedCard} from '../classes/selected-card'
 
@@ -12,8 +12,12 @@ import {SelectedCard} from '../classes/selected-card'
     @Input()pos:number;
     @Input()options:Options = new Options();
     @Output()onSelect:EventEmitter<SelectedCard> = new EventEmitter<SelectedCard>();
+    @ViewChild('cardref', {static: false}) cardref:ElementRef;
         
     constructor() {
+    }
+    ngOnInit(){
+//        console.log(`Card.options: ${JSON.stringify(this.options)}`);
     }
     
     filename():string{
@@ -28,9 +32,15 @@ import {SelectedCard} from '../classes/selected-card'
                     
     toggleSelection(){
 
-        let selectedCard=new SelectedCard();
+        let selectedCard=new SelectedCard(-1,-1);
         selectedCard.cardNo=this.cardNo;
         selectedCard.position=this.pos;
+        let rect= this.cardref.nativeElement.getBoundingClientRect();
+//        console.log(`Card bounding box: ${JSON.stringify(rect)}`);
+        selectedCard.x=rect.x;
+        selectedCard.y=rect.y;
+        selectedCard.width=rect.width;
+        selectedCard.height=rect.height;
         this.onSelect.emit(selectedCard);
     }
 }

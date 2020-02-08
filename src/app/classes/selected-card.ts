@@ -15,5 +15,8 @@ export class SelectedCard implements ISelectedCardModel{
     width: number;
     height: number;
     
-    constructor(){}
+    constructor(cardNo:number,position:number){
+        this.cardNo=cardNo;
+        this.position=position;
+    }
 }

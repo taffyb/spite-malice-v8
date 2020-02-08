@@ -26,11 +26,6 @@ export enum PositionsEnum{
     DECK,
     RECYCLE
 }
-export enum TabsEnum{
-    DEFAULT=0,
-    DASHBOARD=0,
-    PLAY_AREA=1
-}
 export enum SuitsEnum{
     SPADES=0,
     HEARTS=13,
@@ -56,7 +51,7 @@ export enum CardsEnum{
     DECK=52,
     JOKER=53
 }
-export enum TurnEnum{
+export enum MoveTypesEnum{
     PLAYER=0,
     DEALER,
     RECYCLE,

@@ -9,13 +9,13 @@ import {Injectable} from '@angular/core';
 })
 export class GameService{
     
-    constructor(private dealerService:DealerService){}
+    constructor(private dealerSvc:DealerService){}
     
     getGame(gameUuid:string):Game{return null;}
     
     newGame(name:string,player1Uuid:string,player2Uuid:string):Game{
         const game:Game=new Game(name,player1Uuid, player2Uuid);
-        const cardNos:number[] = this.dealerService.getCards();
+        const cardNos:number[] = this.dealerSvc.getCardNos();
         let c:number;
         let card:ICardModel;
         //DEAL PILE
@@ -68,4 +68,3 @@ export class GameService{
     }
     saveGame(){}
 }
-  
