@@ -6,7 +6,7 @@
 <ng-container *ngIf="options.showCardFace && cards.length>0">	
 	<div class="pile-item" >
 		<card [options]="options" 
-			  [pos]="cards[cards.length-1].position" 
+			  [pos]="pos" 
 			  [cardNo]="cards[cards.length-1].cardNo" 
 			  (onSelect)="select($event)">
 		</card>

@@ -28,7 +28,7 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
   from:SelectedCard=new SelectedCard(-1,-1);
   to:SelectedCard=new SelectedCard(-1,-1);
   fromRect={top:0,left:0};
-  @ViewChild('animateCard',{static:false,read: ElementRef})animateCard:ElementRef;
+  @ViewChild('animateCard',{ read: ElementRef })animateCard:ElementRef;
   
   APO:number; /*ACTIVE PLAYER OFFSET */
   
@@ -63,9 +63,6 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
               // locate the position we are moving from and save its position 
               this.fromRect = document.querySelector( `#pos${m.from}` ).getBoundingClientRect();
               this.renderer.addClass(this.animateCard.nativeElement,'visible');
-//              this.renderer.setStyle(this.animateCard.nativeElement, 'position', 'absolute');
-//              this.renderer.setStyle(this.animateCard.nativeElement, 'visibility', 'visible');
-//              this.renderer.setStyle(this.animateCard.nativeElement, 'display', 'block'); 
               
               setTimeout(()=>{
                   this.from.cardNo=m.card;

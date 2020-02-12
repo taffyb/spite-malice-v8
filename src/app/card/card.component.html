@@ -1,7 +1,7 @@
 <div id="c{{pos}}.{{cardNo}}" 
 	[ngClass]="{'card':true, 
 				'selectableFrom':options.selectableFrom,
-				'selectableTo':options.selectableTo && (!selected), 
+				'selectableTo':options.selectableTo && (!options.selected), 
 				'selectable':options.selectableFrom || options.selectableTo,
 				'from':options.selected}" #cardref>
 	<ng-container *ngIf="options.selectableFrom || options.selectableTo">
