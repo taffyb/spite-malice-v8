@@ -26,7 +26,6 @@ import { PileComponent } from './pile/pile.component';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  schemas: []
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

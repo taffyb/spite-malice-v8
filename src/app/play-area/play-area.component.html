@@ -1,6 +1,12 @@
-<card  [cardNo]="from.cardNo" [pos]="0" class="animation" #animateCard [style.left.px]="fromRect.left" [style.top.px]="fromRect.top"></card>
 <div class="play-area">
-	
+	<card *ngIf="fromRect.left>-1" 
+		[cardNo]="m.card" 
+		class="animation" 
+		[@animateCard]="{value:animTrigger,
+						 params:{fTop:fromRect.top,fLeft:fromRect.left,
+								 tTop:toRect.top,tLeft:toRect.left}}"
+		(@animateCard.done)="animDone($event)">
+	</card>	
 	<div class="player" *ngFor="let player of players">		
 		<div class="container">
 			<div class="heading">Name</div>
@@ -10,7 +16,8 @@
 			<div class="heading">Pile</div>
 			<div class="player-pile tooltip" >
 			    <span class="tooltiptext">{{game.cardPositions[pE.PLAYER_PILE+(pPE.PLAYER_2*player)].length}}</span>
-				<app-pile id="pos0"
+				<app-pile 
+					id="pos{{pE.PLAYER_PILE+(pPE.PLAYER_2*player)}}"
 					[pos]="pE.PLAYER_PILE+(pPE.PLAYER_2*player)"
 					[cards]="game.cardPositions[pE.PLAYER_PILE+(pPE.PLAYER_2*player)]"
 					[options]="getOptions(pE.PLAYER_PILE+(pPE.PLAYER_2*player))"
@@ -32,6 +39,7 @@
 				</ng-container>
 				<ng-container *ngIf="player!==game.activePlayer">
 					<app-pile *ngFor="let i of [0,1,2,3,4]"	
+						id="pos{{pE.PLAYER_HAND_1+i+(pPE.PLAYER_2*player)}}"
 						[pos]="pE.PLAYER_HAND_1+i+(pPE.PLAYER_2*player)"			
 						[cards]="[{cardNo:(game.cardPositions[pE.PLAYER_HAND_1+i+(pPE.PLAYER_2*player)].length>0?cE.BACK:0),
 								   position:i+30}]"
@@ -56,7 +64,8 @@
 	<div class="game-row">
 		<div class="game-deck tooltip" >
 			<span class="tooltiptext">{{game.cardPositions[pE.DECK].length}}</span>
-			<app-pile 				
+			<app-pile 			
+				id="pos{{pE.DECK}}"	
 				[pos]="pE.DECK"
 				[cards]="game.cardPositions[pE.DECK]"
 				[options]="getOptions(pE.DECK)">
@@ -64,14 +73,16 @@
 		</div>		
 		<div class="game-recycle tooltip" >
 			<span *ngIf="game.cardPositions[pE.RECYCLE].length>0" class="tooltiptext">{{game.cardPositions[pE.RECYCLE]}}</span>
-			<app-pile 						
+			<app-pile 				
+				id="pos{{pE.RECYCLE}}"			
 				[pos]="pE.RECYCLE"
 				[cards]="game.cardPositions[pE.RECYCLE]"
 				[options]="getOptions(pE.RECYCLE)">
 			</app-pile>			 
 		</div>
 		<div class="game-stacks">
-			<app-pile *ngFor="let i of [0,1,2,3]"		
+			<app-pile *ngFor="let i of [0,1,2,3]"
+				id="pos{{pE.STACK_1+i}}"			
 				[pos]="pE.STACK_1+i"
 				[cards]="game.cardPositions[pE.STACK_1+i]"
 				[options]="getOptions(pE.STACK_1+i)"

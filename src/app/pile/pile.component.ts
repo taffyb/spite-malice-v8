@@ -9,7 +9,7 @@ import {Card} from '../classes/cards';
   styleUrls: ['./pile.component.css']
 })
 export class PileComponent implements OnInit {
-  @Input()pos:number[];
+  @Input()pos:number;
   @Input()cards:Card[];
   @Input()options:Options;
   @Output()onSelect:EventEmitter<SelectedCard> = new EventEmitter<SelectedCard>();

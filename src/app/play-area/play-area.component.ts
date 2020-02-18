@@ -27,8 +27,15 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
   game:Game;
   from:SelectedCard=new SelectedCard(-1,-1);
   to:SelectedCard=new SelectedCard(-1,-1);
-  fromRect={top:0,left:0};
-  @ViewChild('animateCard',{ read: ElementRef })animateCard:ElementRef;
+  
+  //animation controle
+  NO_MOVE={top:-1,left:-1};
+  fromRect=this.NO_MOVE;
+  toRect=this.NO_MOVE;
+  animTrigger="from";
+  m:Move=new Move();
+  animating:boolean=false;
+  moves:Move[]=[];
   
   APO:number; /*ACTIVE PLAYER OFFSET */
   
@@ -58,19 +65,32 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
   }
 
   performMoves(gameUuid: string, moves: IMoveModel[]) {
-      if(gameUuid == this.game.uuid){        
-          moves.forEach((m)=>{
-              // locate the position we are moving from and save its position 
-              this.fromRect = document.querySelector( `#pos${m.from}` ).getBoundingClientRect();
-              this.renderer.addClass(this.animateCard.nativeElement,'visible');
-              
-              setTimeout(()=>{
-                  this.from.cardNo=m.card;
-              });
-              setTimeout(()=>{
-                  this.renderer.removeClass(this.animateCard.nativeElement,'visible');
-              },1000);
-          });
+      if(gameUuid == this.game.uuid){      //only act on moves for this game
+          this.moves.push(... moves);
+          this.animateMove();
+      }
+  }
+  animateMove(){
+      if(!this.animating && this.moves.length>0){
+          let m=this.moves.splice(0,1)[0];
+          this.fromRect=this.pos2ClientRec(m.from);
+          this.toRect=this.pos2ClientRec(m.to);
+          console.log(`fromRect: ${JSON.stringify(this.fromRect)}, toRect:toRect: ${JSON.stringify(this.toRect)}`);
+          this.m=m;
+      }
+  }
+  animDone(evt){
+      if(evt.fromState=='from'){
+        // move the card
+        this.fromRect=this.NO_MOVE;
+        this.toRect=this.NO_MOVE;
+        this.animating=false;
+        if(this.moves.length>0){
+            setTimeout(()=>{
+                this.animTrigger='to';
+                this.animateMove();
+            },50);
+        }
       }
   }
   select(selectedCard:SelectedCard){
@@ -89,7 +109,6 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
               move.to=this.to.position;
               move.type = MoveTypesEnum.PLAYER;
               move.isDiscard=this.isDiscard(this.to.position);
-              
               this.moveSvc.addMove(this.game.uuid, move);
               
               //reset selected Positions
@@ -211,5 +230,11 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
       return canDiscard && !stackSelected();
   }
   
+  pos2ClientRec(pos:number):{top:number,left:number}{
+      let id:string = `#pos${pos}`;
+      console.log(`querySelector(${id})`);
+      const clientRect=document.querySelector( id).getBoundingClientRect();
+      return {top:clientRect.top,left:clientRect.left};
+  }
   
 }

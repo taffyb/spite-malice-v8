@@ -1,12 +1,6 @@
 .animation{
-	visibility:hidden;
-	display:none;
-}
-.animation.visible{
-	visibility:visible;
-	display:block;
+	border:2px solid red;
 	position:absolute;
-	background:red;
 }
 .player{
 	display:inline-flex;
@@ -19,7 +13,7 @@
 	border:solid black 1px;
 }
 .heading{
-	align-text:centre;
+	/*text-align:centre;*/
 	background:gray;
 	color:white;
 	width:100%;
