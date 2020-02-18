@@ -12,11 +12,13 @@ import {PositionsEnum, PlayerPositionsEnum, CardsEnum, MoveTypesEnum} from '../c
 import {GameService} from '../services/game.service';
 import {MoveService} from '../services/move.service';
 import {DealerService} from '../services/dealer.service';
+import {Animations} from './animation';
 
 @Component({
   selector: 'app-play-area',
   templateUrl: './play-area.component.html',
-  styleUrls: ['./play-area.component.css']
+  styleUrls: ['./play-area.component.css'],
+  animations:Animations
 })
 export class PlayAreaComponent implements OnInit, IMoveSubscriber {
 //    @Input()uuid:string=null;
@@ -30,6 +32,7 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
   
   //animation controle
   NO_MOVE={top:-1,left:-1};
+  DURATION=300;
   fromRect=this.NO_MOVE;
   toRect=this.NO_MOVE;
   animTrigger="from";
@@ -56,7 +59,7 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
       this.game.cardPositions[this.pE.PLAYER_HAND_4+10].pop();
       
       this.moveSvc.subscribe(this);
-      this.moveSvc.subscribe(this.game);
+//      this.moveSvc.subscribe(this.game);
       //initialise the convienience value
       this.APO=(this.game.activePlayer*this.pPE.PLAYER_2);
   }
@@ -71,23 +74,28 @@ export class PlayAreaComponent implements OnInit, IMoveSubscriber {
       }
   }
   animateMove(){
+      console.log(`animateMove: animating?${this.animating} moves:${this.moves.length}`);
       if(!this.animating && this.moves.length>0){
           let m=this.moves.splice(0,1)[0];
           this.fromRect=this.pos2ClientRec(m.from);
           this.toRect=this.pos2ClientRec(m.to);
-          console.log(`fromRect: ${JSON.stringify(this.fromRect)}, toRect:toRect: ${JSON.stringify(this.toRect)}`);
-          this.m=m;
+//          console.log(`fromRect: ${JSON.stringify(this.fromRect)}, toRect:toRect: ${JSON.stringify(this.toRect)}`);
+          this.m=m;         
+          setTimeout(()=>{this.animTrigger='to';this.animating=true;},50); 
       }
   }
   animDone(evt){
+      console.log(`animDone:${JSON.stringify(evt)}`);
       if(evt.fromState=='from'){
         // move the card
-        this.fromRect=this.NO_MOVE;
-        this.toRect=this.NO_MOVE;
+//        this.fromRect=this.NO_MOVE;
+//        this.toRect=this.NO_MOVE;
         this.animating=false;
+        this.game.performMove(this.m);
+        this.m=new Move();
+        this.animTrigger='from';
         if(this.moves.length>0){
             setTimeout(()=>{
-                this.animTrigger='to';
                 this.animateMove();
             },50);
         }

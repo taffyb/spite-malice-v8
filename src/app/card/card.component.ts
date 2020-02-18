@@ -14,7 +14,7 @@ import {SelectedCard} from '../classes/selected-card'
     @Input()pos:number;
     @Input()options:Options = new Options();
     @Output()onSelect:EventEmitter<SelectedCard> = new EventEmitter<SelectedCard>();
-    @ViewChild('cardref') cardref:ElementRef;
+    @ViewChild('cardref',{static:false}) cardref:ElementRef;
         
     constructor() {
     }

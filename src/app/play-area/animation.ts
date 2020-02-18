@@ -16,7 +16,7 @@ export const Animations = [
            opacity:'100%',
            zIndex:'999'
          }),{params:{tTop:500,tLeft:500}}),
-         transition('initial=>final', animate('{{duration}}ms'),{params:{duration:500}}),
-         transition('final=>initial', animate('1000ms'))
+         transition('from=>to', animate('{{duration}}ms'),{params:{duration:500}}),
+//         transition('final=>initial', animate('1000ms'))
     ]),
 ]

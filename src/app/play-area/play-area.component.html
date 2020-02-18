@@ -1,10 +1,12 @@
+{{animTrigger}}
 <div class="play-area">
-	<card *ngIf="fromRect.left>-1" 
+	<card *ngIf="m.card>-1" 
 		[cardNo]="m.card" 
 		class="animation" 
 		[@animateCard]="{value:animTrigger,
 						 params:{fTop:fromRect.top,fLeft:fromRect.left,
-								 tTop:toRect.top,tLeft:toRect.left}}"
+								 tTop:toRect.top,tLeft:toRect.left,
+								 duration:DURATION}}"
 		(@animateCard.done)="animDone($event)">
 	</card>	
 	<div class="player" *ngFor="let player of players">		
